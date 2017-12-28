@@ -25,15 +25,13 @@ pub fn step(&mut self) -> u8{
 	// this will be a function to do a generation of step 
 pub fn generate(&mut self, n : u8) -> u8 {
 	
-	let mut i = 0;
-	let mut return_bits = 0;
+	let mut i = 1;
 	while i < n{
-		return_bits = return_bits << 1;
-		return_bits |= self.step();
+		self.buffer = self.buffer << 1;
+		self.buffer |= self.step();
 		i += 1;
 	 } 
-	 self.buffer = return_bits;
-	 return_bits
+	 self.buffer
 }
 }
 }
