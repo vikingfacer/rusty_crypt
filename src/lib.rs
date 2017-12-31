@@ -54,11 +54,34 @@ mod tests {
 	   	assert_eq!(lfrStep.buffer, lfrGenerate.buffer);        	    
     }
     #[test]
-    fn lfr_seven_generate_eight() {
-	   	let mut lfrGenerate = LeftShiftRegister{_step : 2, buffer : 7};
-	   	lfrGenerate.generate(8);
+    fn transform_byte_vector() {
+		let StringInput = String::from("this is a string");
 
-	   	assert_eq!(lfrGenerate.buffer, 198);
+		let mut input : Vec<u8> = Vec::from(StringInput);
+		let inputCheck : Vec<u8> = input.clone();
+
+		let mut _lsr = LeftShiftRegister{_step : 2, buffer : 0b11100111};
+		let mut _lsr2 = LeftShiftRegister{_step : 2, buffer : 0b11100111};
+
+		for byte in input.iter_mut(){
+			*byte ^= _lsr.buffer;
+			_lsr.generate(3);
+		}
+
+		println!("{:?}",input);
+
+		for byte in input.iter_mut(){
+			*byte ^= _lsr2.buffer;
+			_lsr2.generate(3);
+		}
+		assert_eq!(input, inputCheck);
     }
 
 }
+
+
+
+
+
+
+
