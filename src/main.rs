@@ -8,7 +8,8 @@ use std::io::{self, Read};
 fn main() {
 	// let mut _tester = LeftShiftRegister{ _step : 3, buffer : 128};
 	let mut input : Vec<u8> = Vec::new();
-	let mut lsr = LeftShiftRegister{_step : 4, buffer : 8};
+	let mut _lsr = LeftShiftRegister{_step : 2, buffer : 0b11100111};
+	let mut _lsr2 = LeftShiftRegister{_step : 2, buffer : 0b11100111};
 	let stdin = io::stdin();
 	let mut handle = stdin.lock();
 
@@ -16,15 +17,17 @@ fn main() {
 	println!("{:?}", input);
 
 	for byte in input.iter_mut(){
-		*byte = *byte ^ lsr.buffer;
-		lsr.generate(9);
+		*byte ^= _lsr.buffer;
+		_lsr.generate(3);
 	}
-	println!("{:?}", input);
+	println!("{:?}",input);
+
 	for byte in input.iter_mut(){
-		*byte = *byte ^ lsr.buffer;
-		lsr.generate(9);
+		*byte ^= _lsr2.buffer;
+		_lsr2.generate(3);
 	}
-	println!("{:?}", input);
+	println!("{:?}",input);
+
 
 }
 

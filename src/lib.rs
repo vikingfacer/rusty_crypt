@@ -30,6 +30,20 @@ mod tests {
     }
 
     #[test]
+    fn step_eight_buffer_seven() {
+        let mut lfr = LeftShiftRegister{_step: 2, buffer : 0b11100111};
+
+		assert_eq!( 0, lfr.step());
+		assert_eq!( 0, lfr.step());
+		assert_eq!( 0, lfr.step());
+		assert_eq!( 0, lfr.step());
+		assert_eq!( 0, lfr.step());
+		assert_eq!( 1, lfr.step());
+		assert_eq!( 1, lfr.step());
+		assert_eq!( 1, lfr.step());
+    }
+
+    #[test]
     fn two_steps_is_generate_two() {
 	   	let mut lfrStep = LeftShiftRegister{_step : 1, buffer : 4};
 	   	let mut lfrGenerate = LeftShiftRegister{_step : 1, buffer : 4};
@@ -45,13 +59,6 @@ mod tests {
 	   	lfrGenerate.generate(8);
 
 	   	assert_eq!(lfrGenerate.buffer, 198);
-    }
-    #[test]
-    fn lfr_generate_five() {
-	   	let mut lfrGenerate = LeftShiftRegister{_step : 8, 
-	   											buffer : 0b01101000010};
-
-	   	assert_eq!(lfrGenerate.buffer, 25);
     }
 
 }
